@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var mustacheExpress = require('mustache-express');
+var pgp = const pgp = require('pg-promise')();
 var db = pgp(process.env.DATABASE_URL ||'postgres://babegrrl69@localhost:5432/project2');
 
 var apath = '/somepath';
