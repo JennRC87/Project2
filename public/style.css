@@ -119,6 +119,7 @@ table, td a{
 td{
   vertical-align: top;
   text-align: center;
+  border-bottom: #3A2D22 dotted 1px;
 
 }
 
@@ -135,7 +136,7 @@ table{
   margin:250px auto 0 auto;
 }
 
-
+/* thanks (http://ianlunn.github.io/Hover/) */
 .hvr-glow {
   display: inline-block;
   vertical-align: middle;

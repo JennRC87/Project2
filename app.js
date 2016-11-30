@@ -41,6 +41,9 @@ app.get("/", function(req, res){
     "email": email
   }
 
+  // curl.request({url: 'https://api.seatgeek.com/2/events/801255'}, function(err, stdout, meta){
+  //   console.log(stdout);
+  // });
 
   res.render('index', data);
 });
@@ -84,29 +87,18 @@ app.post('/login', function(req, res){
 
 app.post('/broadway', function(req, res){
     fetch("https://api-sandbox.londontheatredirect.com/rest/v2/Events",
-          {
+          { method: 'GET',
             headers:{
-              "Api-Key": process.env.MYKEY,
+              "Api-Key": "5kgbc7wu7uqfbqskeuaqaazh",
               "X-Originating-Ip": "208.185.23.206",
               "Content-Type": "application/json"
-            },
-            type: 'get',
-            dataType: 'json',
-            contentType: 'application/json',
-            processData: false
+            }
           }).then(function(data){
             return data.json(data)
           }).then(function(json){
             res.send(json)
-          })
-})
-
-// app.get("/contact", function(req, res) {
-//   db.many("SELECT * FROM buildings").then(function(data) {
-//     var stuff = data;
-//     res.render('buildings',{title:stuff});
-//   });
-// });
+          });
+});
 
 
 app.get('/user', function(req, res){
