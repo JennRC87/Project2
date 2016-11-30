@@ -2,18 +2,41 @@
 <html>
 <head>
 
-  <title>NYC Playhouse</title>
+  <title>London Playhouse</title>
+
   <link rel="stylesheet" href="../public/style.css">
   <link href="https://fonts.googleapis.com/css?family=Lato|Palanquin:100|Permanent+Marker" rel="stylesheet">
+  <script src="/scripts/jquery.js" ></script>
+  <script src="/scripts/main.js" ></script>
+
 </head>
-<body class="regBackground">
+<body class="blurBackground">
 
 {{>header}}
 
 
-<footer>
-<p>&copy; 2016</p>
-</footer>
+<table>
+  <tbody>
+    <tr>
+      <td>Email Us:</td>
+      <td><a href="mailto:joe@example.com" class="hvr-skew-forward">Customer Service</a></td>
+    </tr>
+    <tr>
+      <td>Write Us:</td>
+      <td>London Playhouse<br>
+          123 West End <br>
+          Pimlico, London SW1V 1LG, UK</td>
+    </tr>
+    <tr>
+      <td colspan="" rowspan="" headers="">Call Us:</td>
+      <td colspan="" rowspan="" headers="">0845 505 8500
+</td>
+    </tr>
+  </tbody>
+</table>
+
+
+{{>footer}}
 
 </body>
 </html>

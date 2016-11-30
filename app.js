@@ -4,10 +4,11 @@ const pgp = require('pg-promise')();
 const mustacheExpress = require('mustache-express');
 const bodyParser = require("body-parser");
 const session = require('express-session');
-
+const curl = require('curlrequest');
+const fetch = require("node-fetch")
 var apath = '/somepath';
 var db = pgp(process.env.DATABASE_URL ||'postgres://babegrrl69@localhost:5432/logindb');
-
+var appkey = process.env.MYKEY
 /* BCrypt stuff here */
 const bcrypt = require('bcrypt');
 
@@ -40,12 +41,13 @@ app.get("/", function(req, res){
     "email": email
   }
 
+
   res.render('index', data);
 });
 
-app.get("/", function(req, res){
-  res.render('index')
-});
+// app.get("/", function(req, res){
+//   res.render('index')
+// });
 
 app.post('/signup', function(req, res){
   var data = req.body;
@@ -80,6 +82,24 @@ app.post('/login', function(req, res){
   });
 });
 
+app.post('/broadway', function(req, res){
+    fetch("https://api-sandbox.londontheatredirect.com/rest/v2/Events",
+          {
+            headers:{
+              "Api-Key": process.env.MYKEY,
+              "X-Originating-Ip": "208.185.23.206",
+              "Content-Type": "application/json"
+            },
+            type: 'get',
+            dataType: 'json',
+            contentType: 'application/json',
+            processData: false
+          }).then(function(data){
+            return data.json(data)
+          }).then(function(json){
+            res.send(json)
+          })
+})
 
 // app.get("/contact", function(req, res) {
 //   db.many("SELECT * FROM buildings").then(function(data) {
@@ -108,3 +128,4 @@ app.get('/webinfo', function(req, res){
 app.listen(3000, function () {
   console.log('listening on port 3000!');
 });
+

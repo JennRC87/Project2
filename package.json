@@ -4,7 +4,7 @@
   "description": "",
   "main": "jquery.js",
   "engines": {
-  "node": "6.8.1"
+    "node": "6.8.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,9 +15,13 @@
   "dependencies": {
     "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
+    "curl": "^0.1.4",
+    "curlrequest": "^1.0.1",
     "express": "^4.14.0",
+    "hover.css": "^2.0.2",
     "mustache": "^2.3.0",
     "mustache-express": "^1.2.4",
+    "node-fetch": "^1.6.3",
     "pg-promise": "^5.4.4"
   }
 }
