@@ -5,7 +5,8 @@ const mustacheExpress = require('mustache-express');
 const bodyParser = require("body-parser");
 const session = require('express-session');
 const curl = require('curlrequest');
-const fetch = require("node-fetch")
+const fetch = require("node-fetch");
+
 var apath = '/somepath';
 var db = pgp(process.env.DATABASE_URL ||'postgres://babegrrl69@localhost:5432/logindb');
 var appkey = process.env.MYKEY
@@ -84,17 +85,17 @@ app.post('/login', function(req, res){
     });
   });
 });
-
+// thanks Taylor & Nick
 app.post('/broadway', function(req, res){
     fetch("https://api-sandbox.londontheatredirect.com/rest/v2/Events",
           { method: 'GET',
             headers:{
-              "Api-Key": "5kgbc7wu7uqfbqskeuaqaazh",
-              "X-Originating-Ip": "208.185.23.206",
+              "Api-Key": process.env.MYKEY,
+              // "X-Originating-Ip": "208.185.23.206",
               "Content-Type": "application/json"
             }
-          }).then(function(data){
-            return data.json(data)
+          }).then(function(res){
+            return res.json()
           }).then(function(json){
             res.send(json)
           });
@@ -117,7 +118,7 @@ app.get('/webinfo', function(req, res){
   res.render('contact')
 });
 
-app.listen(3000, function () {
+app.listen(3000, function(){
   console.log('listening on port 3000!');
 });
 
