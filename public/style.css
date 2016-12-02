@@ -162,6 +162,8 @@ input[name=submit]{
 
 .show{
   color: #F1C40F;
+  font-family:'Lato', sans-serif ;
+  font-size: 20px;
   width: 900px;
   position: static;
   background: rgba(34, 24, 15, .9);
