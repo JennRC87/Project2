@@ -8,7 +8,7 @@ body{
   background-color: #22180F;
   background-image: url("../images/telephone.jpg");
   background-repeat: no-repeat;
-  background-position: center 0px;
+  background-position: center -60px;
   background-attachment: fixed;
   background-size: cover;
 }
@@ -29,6 +29,17 @@ header {
   height: 140px;
   text-align: center;
   top: 0px;
+}
+
+footer{
+  position: fixed;
+  background: #22180F;
+  width: 100%;
+  height: 25px;
+  bottom: 0px;
+  text-align: center;
+  padding-bottom: 15px;
+  font-size: 12px;
 }
 
 h1 {
@@ -71,13 +82,13 @@ p{
   color: #F1C40F;
 }
 
-fieldset{
-  padding-right: 17px;
+fieldset#caForm, fieldset#liForm {
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 230px;
   width: 300px;
-  position: static;
-  margin-right: auto;
-  margin-left: auto;
+/*   position: static; */
+  padding-right: 17px;
 }
 
 form{
@@ -86,56 +97,110 @@ form{
   color: #22180F;
 }
 
-input[type=text], input[type=password],  select {
+
+input.iForm   {
   width: 97%;
   padding: 5px 6px;
   font-size: 12px;
   border-radius: 4px;
+  font-family: 'Lato', sans-serif;
 }
 
-input[type=submit]{
-  font-family: 'Lato', sans-serif;
-  margin-top: 15px;
+/* input [name=userSearch]{
+  width:  130px;
+  border : 2px black solid;
+  font-size: 12px;
+  background-color: #FAF6EC;
+  transition: width 0.4s ease;
 }
+
 
 input[name=search]{
   padding: 10px;
   width: 400px;
-}
+} */
 
-#searchform{
-  margin-left: auto;
-  margin-right: auto;
+/*  #searchform{
+  margin-left: 20px;
   margin-top: 350px;
   width: 250px;
+}  */
+
+input[id=headerSearch]{
+  font-family: 'Lato', sans-serif;
+  margin-top: 15px;
+  width: 55px;
+  background-color: #F1C40F;
+  border: none;
+  border-radius: 5px;
 }
 
-footer{
-  position: fixed;
-  background: #22180F;
-  width: 100%;
-  height: 25px;
-  bottom: -5px;
+
+input[name=userSearch]{
+  background-image: url('/images/search.png');
+  background-color: #FAF6EC;
+  padding-left: 15px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 20px;
+  width: 150px;
+  padding-left: 30px;
+  text-decoration: none;
+  border-radius: 5`px;
+  border: none;
+  font-family: 'Lato', sans-serif;
+
+}
+
+form#searchForm{
+  margin-top: -110px;
+  margin-left: -921px;
+  padding-left: 12px;
+  font-size: 22px;
+/*   position: static; */
+}
+
+input[name=submit]{
+  padding: 0px;
+  width: 55px;
+  border-radius: 5px;
+  border: none;
+  height: 18px;
+  background-color: #FAF6EC;
+  color: #22180F;
+  font-family: 'Lato', sans-serif;
+  font-size: 11px;
   text-align: center;
-  padding-bottom: 15px;
-  font-size: 12px;
+  margin-left: 4px;
+
+} */
+
+
+#showdisplay{
+  width: 900px;
+  position: static;
+  background-color: rgba(34, 24, 15, .7);
+  text-align: center;
+  margin: 170px auto 50px auto;
+  padding: 40px 20px;
+} */
+
+.headerLink{
+  color: black;
+  text-decoration: none;
+
 }
 
 table, td a{
-  color: #F1C40F;
   position: static;
   font-family: 'Lato', sans-serif;
   line-height: 20px;
-}
-
-td{
-  vertical-align: top;
-  text-align: center;
-  border-bottom: #3A2D22 dotted 1px;
-
+  font-size: 17px;
 }
 
 td a{
+  vertical-align: top;
+  color: #F1C40F;
   font-size: 17px;
 }
 
@@ -143,9 +208,11 @@ td a{
 table{
   border: dotted #F1C40F 1px;
   padding: 20px;
-  background-color: rgba(34, 24, 15, .7);
+  background-color: rgba(34, 24, 15, .5);
   width: 400px;
   margin:250px auto 0 auto;
+  color: #F1C40F;
+  text-align: center;
 }
 
 /* thanks (http://ianlunn.github.io/Hover/) */
@@ -182,7 +249,9 @@ table{
   transform: skew(-10deg);
 }
 
+
 @media only screen and (max-width: 500px) {
+
   h1{
     font-size: 30px;
     padding-top: 12px;
@@ -201,13 +270,14 @@ table{
     font-size: 12px;
     padding: 0 15px;
   }
-  fieldset, table{
+  table{
     width: 200px;
     height: 230px;
     position: relative;
     margin-top: 200px;
     margin-right: auto;
     margin-left: auto;
+    line-height: 15px;
 /*     display: block;
  */
   }
@@ -215,17 +285,54 @@ table{
 input[type=text], input[type=password],  select{
   width: 97%;
   height: 8px;
-  font-size: 12px;
+  font-size: 8px;
+}
+input[name=userSearch]{
+  padding-left: 14px;
 }
 
-  form{
-/*     width: 60%; */
-    line-height: 28px;
+
+fieldset#caForm, fieldset#liForm{
+    line-height: 23px;
     font-size: 15px;
-/*     margin-top: 0; */
+}
+
+fieldset#caForm{
+  height: 181px;
+  width: 240px;
+}
+
+fieldset#liForm{
+  height: 145px;
+  width: 140px;
+}
+
+input.iForm{
+    width: 90%;
+    font-size: 15px;
+    margin-top: 0;
   }
   td, input{
     font-size: 12px;
   }
+
+  form#searchForm{
+    width: 27px;
+    margin-left: 16px;
+    margin-top: -32px;
+  }
+
+  header{
+    height: 100px;
+  }
+  footer{
+    height: 13px;
+    background-size: 13px 100%
+  }
+
+  .hvr-skew-forward{
+    font-size: 12px;
+  }
+
 }
 

@@ -1,4 +1,5 @@
-DROP TABLE IF EXISTS users_li;
+DROP TABLE IF EXISTS users_li CASCADE;
+DROP TABLE IF EXISTS users_info CASCADE;
 
 CREATE TABLE users_li (
   id SERIAL PRIMARY KEY,
@@ -8,10 +9,9 @@ CREATE TABLE users_li (
 );
 
 
-DROP TABLE IF EXISTS users_info;
-
 CREATE TABLE users_info(
   id SERIAL PRIMARY KEY,
   name VARCHAR(255),
-  show VARCHAR(255)
+  show VARCHAR(255),
+  user_id INTEGER REFERENCES users_li(id)
 );

@@ -29,29 +29,26 @@ app.use(session({
 
 
 app.get("/", function(req, res){
-  var logged_in;
+  var logged_in; //logged in requires this
   var email;
+  var id;
 
-  if(req.session.user){
-    logged_in = true;
+  if(req.session.user){ //logged in requires this
+    logged_in = true; //logged in
     email = req.session.user.email;
+    id = req.session.user.id
   }
 
-  var data = {
-    "logged_in": logged_in,
-    "email": email
+  var data = { // object to send to mustache
+    "logged_in": logged_in, // letting mustache know if you are logged in or not
+    "email": email,
+    'id': id
   }
 
-  // curl.request({url: 'https://api.seatgeek.com/2/events/801255'}, function(err, stdout, meta){
-  //   console.log(stdout);
-  // });
 
   res.render('index', data);
 });
 
-// app.get("/", function(req, res){
-//   res.render('index')
-// });
 
 app.post('/signup', function(req, res){
   var data = req.body;
@@ -78,15 +75,18 @@ app.post('/login', function(req, res){
     bcrypt.compare(data.password, user.password_digest, function(err, cmp){
       if(cmp){
         req.session.user = user;
-        res.render('myprofile');
+        res.redirect('/user/'+user.id);
       } else {
-        res.render('login')
+        res.redirect('/login')
       }
     });
   });
 });
-// thanks Taylor & Nick
+
+// thanks Taylor & Nick & John
 app.post('/broadway', function(req, res){
+  console.log("app.js firing")
+  const userSearch = req.body.userSearch;
     fetch("https://api-sandbox.londontheatredirect.com/rest/v2/Events",
           { method: 'GET',
             headers:{
@@ -94,28 +94,117 @@ app.post('/broadway', function(req, res){
               // "X-Originating-Ip": "208.185.23.206",
               "Content-Type": "application/json"
             }
-          }).then(function(res){
-            return res.json()
+          }).then(function(dataResponse){
+            console.log('json');
+            return dataResponse.json()
           }).then(function(json){
-            res.send(json)
+            console.log("usersearch", req.body.userSearch)
+            var searchResult = json["Events"].filter(
+                show => show["Name"] === userSearch
+              )
+            console.log("searchResult", searchResult);
+            // console.log('json');
+            res.render('listofshows', { searchResult: searchResult});
           });
 });
 
 
+
+
+
+app.post('/formInput', function(req, res){
+  if(req.session.user){
+    var saveShow = req.body.showName
+    var user = req.session.user;
+    db.none('INSERT INTO users_info (name, show, user_id) VALUES ($1, $2, $3)', [user.name, saveShow, user.id]).then(function(data){
+      res.redirect('/shows')
+    })
+  }else{
+    res.redirect('/');
+  }
+})
+
+
 app.get('/user', function(req, res){
-  res.render('login')
+   var logged_in; //logged in requires this
+  var email;
+  var id;
+
+  if(req.session.user){ //logged in requires this
+    logged_in = true; //logged in
+    email = req.session.user.email;
+    id = req.session.user.id
+  }
+
+  var data = { // object to send to mustache
+    "logged_in": logged_in, // letting mustache know if you are logged in or not
+    "email": email,
+    'id': id
+  }
+  res.render('login', data )
 });
 
-app.get('/userprofile', function(req, res){
-  res.render('myprofile')
+
+app.get('/user/:id', function(req, res){
+ var logged_in; //logged in requires this
+  var email;
+  var id;
+
+  if(req.session.user){ //logged in requires this
+    logged_in = true; //logged in
+    email = req.session.user.email;
+    id = req.session.user.id
+    db.any('SELECT * FROM users_info WHERE id=$1', [id]).then(function(data){
+     var data = { // object to send to mustache
+      'logged_in': logged_in, // letting mustache know if you are logged in or not
+      'email': email,
+      'id': id
+  }
+  res.render('myprofile', data)
+    })
+  }
 });
 
 app.get('/shows', function(req, res){
-  res.render('listofshows')
+  var logged_in; //logged in requires this
+  var email;
+  var id;
+
+  if(req.session.user){ //logged in requires this
+    logged_in = true; //logged in
+    email = req.session.user.email;
+    id = req.session.user.id
+  }
+
+  var data = { // object to send to mustache
+    "logged_in": logged_in, // letting mustache know if you are logged in or not
+    "email": email,
+    'id': id
+  }
+
+
+  console.log("shows firing")
+  res.render('listofshows', data)
 });
 
 app.get('/webinfo', function(req, res){
-  res.render('contact')
+    var logged_in; //logged in requires this
+  var email;
+  var id;
+
+  if(req.session.user){ //logged in requires this
+    logged_in = true; //logged in
+    email = req.session.user.email;
+    id = req.session.user.id
+  }
+
+  var data = { // object to send to mustache
+    "logged_in": logged_in, // letting mustache know if you are logged in or not
+    "email": email,
+    'id': id
+  }
+
+  res.render('contact', data)
 });
 
 app.listen(3000, function(){

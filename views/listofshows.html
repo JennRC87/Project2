@@ -14,15 +14,22 @@
 {{>header}}
 
 
-<form id="searchform" action="/broadway" method="post">
-  <input type="text" name="search" placeholder="Search..">
-  <input type="submit" name="submit">
-</form>
+{{#searchResult}}
+<div id="showdisplay">
+  <div>{{Name}}</div><br>
+  <div><img src="{{MainImageUrl}}" alt=""></div><br>
+  <div>{{{TagLine}}}</div><br>
+  <div>{{{Description}}}</div><br>
 
-<!-- <div class="placeholder">
-  <h5>The Color Purple</h5>
-  <img src="">
-</div> -->
+  <form action="/formInput" method="post">
+      <input type="hidden" name="showName" value="{{Name}}">
+      <input type="submit" name="submit" value="Save">
+  </form>
+
+</div>
+{{/searchResult}}
+
+
 
 {{>footer}}
 
