@@ -18,6 +18,7 @@
     "curl": "^0.1.4",
     "curlrequest": "^1.0.1",
     "express": "^4.14.0",
+    "express-session": "^1.14.2",
     "hover.css": "^2.0.2",
     "method-override": "^2.3.7",
     "mustache": "^2.3.0",
