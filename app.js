@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const session = require('express-session');
 const curl = require('curlrequest');
 const fetch = require("node-fetch");
+const mo = require("method-override");
 
 var apath = '/somepath';
 var db = pgp(process.env.DATABASE_URL ||'postgres://babegrrl69@localhost:5432/logindb');
@@ -19,7 +20,9 @@ app.set('views', __dirname + '/views');
 app.use("/", express.static(__dirname + '/'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(mo('__method'))
 
+// sessions is the cookies
 app.use(session({
   secret: 'theTruthIsOutThere51',
   resave: false,
@@ -114,10 +117,10 @@ app.post('/broadway', function(req, res){
 
 app.post('/formInput', function(req, res){
   if(req.session.user){
-    var saveShow = req.body.showName
+    var saveShow = req.body.showName;
     var user = req.session.user;
     db.none('INSERT INTO users_info (name, show, user_id) VALUES ($1, $2, $3)', [user.name, saveShow, user.id]).then(function(data){
-      res.redirect('/shows')
+      res.redirect('/user/' + user.id)
     })
   }else{
     res.redirect('/');
@@ -154,13 +157,16 @@ app.get('/user/:id', function(req, res){
     logged_in = true; //logged in
     email = req.session.user.email;
     id = req.session.user.id
-    db.any('SELECT * FROM users_info WHERE id=$1', [id]).then(function(data){
-     var data = { // object to send to mustache
+    db.any('SELECT * FROM users_info WHERE user_id=$1', [id])
+    .then(function(data){
+      console.log(data)
+     var showSaves = { // object to send to mustache
       'logged_in': logged_in, // letting mustache know if you are logged in or not
       'email': email,
-      'id': id
+      'id': id,
+      'data': data
   }
-  res.render('myprofile', data)
+  res.render('myprofile', showSaves)
     })
   }
 });
@@ -206,6 +212,24 @@ app.get('/webinfo', function(req, res){
 
   res.render('contact', data)
 });
+
+app.delete('/deletePost', function (req, res){
+  if(req.session.user){
+    var logged_in = true;
+    var email= req.session.user.email;
+    var user_id = req.session.user.id;
+    var postDelete = req.body.postDelete
+    // user_id = req.session.user.id
+    db.none('DELETE FROM users_info WHERE id=$1',[postDelete])
+    .then(function(){
+        res.redirect('/user/'+ user_id)
+    })
+  }else{
+    res.redirect('');
+  }
+})
+
+
 
 app.listen(3000, function(){
   console.log('listening on port 3000!');

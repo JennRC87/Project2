@@ -106,25 +106,6 @@ input.iForm   {
   font-family: 'Lato', sans-serif;
 }
 
-/* input [name=userSearch]{
-  width:  130px;
-  border : 2px black solid;
-  font-size: 12px;
-  background-color: #FAF6EC;
-  transition: width 0.4s ease;
-}
-
-
-input[name=search]{
-  padding: 10px;
-  width: 400px;
-} */
-
-/*  #searchform{
-  margin-left: 20px;
-  margin-top: 350px;
-  width: 250px;
-}  */
 
 input[id=headerSearch]{
   font-family: 'Lato', sans-serif;
@@ -173,17 +154,21 @@ input[name=submit]{
   text-align: center;
   margin-left: 4px;
 
-} */
+}
 
+.show img {
+  width: 250px;
+}
 
-#showdisplay{
+.show{
+  color: #F1C40F;
   width: 900px;
   position: static;
-  background-color: rgba(34, 24, 15, .7);
+  background: rgba(34, 24, 15, .9);
   text-align: center;
   margin: 170px auto 50px auto;
   padding: 40px 20px;
-} */
+}
 
 .headerLink{
   color: black;
@@ -249,8 +234,26 @@ table{
   transform: skew(-10deg);
 }
 
+div#savedShows{
+  margin-top: 192px;
+  margin-left: 53px;
+  color: #F1C40F;
+  font-family: 'Palanquin', sans-serif;
+  font-size: 21px;
+  background-color: rgba(34, 24, 15, .5);
+  display: inline-block;
+  padding: 17px;
+}
+
+#savedShows a{
+  color: #F1C40F;
+  font-family: 'Palanquin', sans-serif;
+  font-size: 21px;
+ }
+
 
 @media only screen and (max-width: 500px) {
+
 
   h1{
     font-size: 30px;
@@ -282,36 +285,37 @@ table{
  */
   }
 
-input[type=text], input[type=password],  select{
-  width: 97%;
-  height: 8px;
-  font-size: 8px;
-}
-input[name=userSearch]{
-  padding-left: 14px;
-}
-
-
-fieldset#caForm, fieldset#liForm{
-    line-height: 23px;
-    font-size: 15px;
-}
-
-fieldset#caForm{
-  height: 181px;
-  width: 240px;
-}
-
-fieldset#liForm{
-  height: 145px;
-  width: 140px;
-}
-
-input.iForm{
-    width: 90%;
-    font-size: 15px;
-    margin-top: 0;
+  input[type=text], input[type=password],  select{
+    width: 97%;
+    height: 8px;
+    font-size: 8px;
   }
+  input[name=userSearch]{
+    padding-left: 14px;
+  }
+
+
+  fieldset#caForm, fieldset#liForm{
+      line-height: 23px;
+      font-size: 15px;
+  }
+
+  fieldset#caForm{
+    height: 181px;
+    width: 240px;
+  }
+
+  fieldset#liForm{
+    height: 145px;
+    width: 140px;
+  }
+
+  input.iForm{
+      width: 90%;
+      font-size: 15px;
+      margin-top: 0;
+    }
+
   td, input{
     font-size: 12px;
   }

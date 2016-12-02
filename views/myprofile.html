@@ -11,9 +11,19 @@
 
 <body class="regBackground">
 {{>header}}
-hello
+{{#data}}
+  <div id="savedShows">
+  <div><a href="#">{{show}}</a></div>
+  <form action="/deletePost?__method=DELETE" method="POST" > <!-- method override -->
+    <button  type="submit">DELETE</button>
+    <input type="hidden" name="postDelete" value="{{id}}"> <!-- value is id because I am getting it from inside the data in my app.js -->
+  </form>
+  </div>
+{{/data}}
 
 {{>footer}}
 
 </body>
 </html>
+
+
