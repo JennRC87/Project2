@@ -1,3 +1,5 @@
+// thanks Brian for the login + encrytion
+// thanks marcos for keeping people logged in
 const express = require('express');
 const app = express();
 const pgp = require('pg-promise')();
